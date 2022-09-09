@@ -13,15 +13,25 @@ function createGalleryMarkup(galleryItems) {
   const markup = galleryItems
     .map(
       (item) =>
-        `<li class="gallery__item"><img class="gallery__image" src="${item.preview}" alt="${item.description}" data-original-src="${item.original}" /></li>`
+        `<div class="gallery__item">
+        <a class="gallery__link" href="${item.original}">
+          <img
+            class="gallery__image"
+            src="${item.preview}"
+            data-source="${item.original}"
+            alt="${item.description}"
+          />
+        </a>
+      </div>`
     )
     .join("");
 
-  return `<ul class='gallery__list'>${markup}</ul>`;
+  return markup;
 }
 
 function onImageClick(event) {
-  originalSizeImage.src = event.target.dataset.originalSrc;
+  event.preventDefault();
+  originalSizeImage.src = event.target.dataset.source;
 
   lightBox.show();
 }
