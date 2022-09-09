@@ -8,7 +8,10 @@ const originalSizeImage = lightBox.element().querySelector(".originalImage");
 galleryEl.innerHTML = createGalleryMarkup(galleryItems);
 
 galleryEl.addEventListener("click", onImageClick);
-document.addEventListener("keydown", onEscapeKey);
+
+if (!lightBox.visible()) {
+  document.addEventListener("keydown", onEscapeKey);
+}
 
 function createGalleryMarkup(galleryItems) {
   const markup = galleryItems
@@ -38,10 +41,6 @@ function onImageClick(event) {
 
 function onEscapeKey(event) {
   if (event.key !== "Escape") {
-    return;
-  }
-
-  if (!lightBox.visible()) {
     return;
   }
 
